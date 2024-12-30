@@ -1,0 +1,27 @@
+services:
+  app:
+    container_name: bit_server
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file: .env
+  db:
+    container_name: postgres_server_db
+    image: postgres:13
+    env_file: .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+
+
+# CREATE TABLE btc_data (
+#   id SERIAL PRIMARY KEY,
+#   price FLOAT NOT NULL,
+#   timestamp TIMESTAMP NOT NULL
+# );
